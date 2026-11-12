@@ -1,5 +1,14 @@
+# Board template
+
+The Session Board page. Everything on it is drawn from the plan JSON, so never edit or redesign this markup per plan.
+
+To build a board, copy the block below into the output `.html` file and put the contents of `plan.json` on the line that reads `__DATA__` (with every `</` written as `<\/`). SKILL.md section 5, step 4, has the one command that does both.
+
+```html
+<!doctype html>
+<html lang="en">
 <meta charset="utf-8">
-<title>__TITLE__</title>
+<title>Session Board</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,7 +145,9 @@ footer{color:var(--muted);font-size:13px}
   <footer id="foot"></footer>
 </div>
 
-<script type="application/json" id="data">__DATA__</script>
+<script type="application/json" id="data">
+__DATA__
+</script>
 <script>
 (function(){
   var D = JSON.parse(document.getElementById('data').textContent);
@@ -265,3 +276,5 @@ footer{color:var(--muted);font-size:13px}
   refresh();
 })();
 </script>
+</html>
+```

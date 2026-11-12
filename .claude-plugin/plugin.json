@@ -1,6 +1,6 @@
 {
   "name": "session-board-lite",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Split one big job into Claude Code sessions and build a local board with one paste-ready card per session.",
   "author": { "name": "Aditya Vora", "url": "https://github.com/adityavora16" },
   "homepage": "https://github.com/adityavora16/session-board-lite",

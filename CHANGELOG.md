@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.2, 12 November 2026
+
+- The plugin now holds only Markdown, JSON and images, as the plugin directory requires.
+- `scripts/build.py` is gone. Its checks (models, waves, dependencies, overlapping `owns` paths,
+  thin prompts) are now a checklist in SKILL.md that Claude runs before building.
+- `assets/template.html` moved to `references/board-template.md`. The board is built with one
+  `awk` command, so Python is no longer needed. The page itself is unchanged.
+
 ## v1.0.1, 12 November 2026
 
 - Plugin icon added.

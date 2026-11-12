@@ -15,9 +15,9 @@ bundled in the repo: the page loads fonts from Google Fonts at view time and run
 
 | Part | Author | Licence | Used by | Link |
 |---|---|---|---|---|
-| Python 3 (standard library only) | Python Software Foundation | PSF License | `scripts/build.py` | https://www.python.org |
+| awk | ships with macOS and Linux | system licence | the build command in SKILL.md | https://pubs.opengroup.org/onlinepubs/9799919799/utilities/awk.html |
 
-The build script imports only `html`, `json`, `sys` and `pathlib`. There is nothing to `pip install`.
+The repo contains no scripts or programs. There is nothing to install.
 
 ## Data
 

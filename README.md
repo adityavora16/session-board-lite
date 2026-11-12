@@ -5,8 +5,8 @@
 Session Board Lite is a free Claude Code skill. It splits one big job into separate sessions you can
 run in parallel, writes a prompt for each, and builds a local HTML board with one card per session.
 Each card shows the prompt with a Copy button, the model to pick, when to start it, what it needs
-first and which sessions can run alongside it. The build script refuses a plan where two sessions
-running at the same time own the same files.
+first and which sessions can run alongside it. Claude checks the plan first and refuses one where
+two sessions running at the same time own the same files.
 
 ![A Lite board for an invented three-session job: the model cards, the order of the waves, notes, and the first cards with READY and WAITING badges](screenshot/board-lite.png)
 
@@ -18,7 +18,8 @@ says so and does not build a board.
 
 ## Install
 
-Needs Claude Code 2.1.116 or newer, Python 3 (standard library only) and a browser.
+Needs Claude Code 2.1.116 or newer and a browser. The board is built with `awk`, which ships with
+macOS and Linux (on Windows, Git Bash or WSL).
 
 ```bash
 claude plugin marketplace add adityavora16/claude-plugins
@@ -42,13 +43,13 @@ session) are in [`INSTALL.md`](INSTALL.md).
 2. It splits the job into sessions, one outcome each, and groups them into waves. Everything in a
    wave can run at the same time. A contracts session goes first when several sessions build
    against a shared schema or API, and an integration session goes last.
-3. It writes `plan.json`. The build script rejects a plan where two sessions in one wave own the
+3. It writes `plan.json` and checks it: it rejects a plan where two sessions in one wave own the
    same path, or where one owns a folder that contains the other's, and warns about prompts too thin
    to stand alone.
 4. It writes the board as a local HTML file. To change the board, edit `plan.json` and build again:
 
    ```bash
-   python3 skills/session-board-lite/scripts/build.py docs/sessions/plan.json session-board.html --local
+   awk '/^```html$/{on=1;next} /^```$/{on=0} on' skills/session-board-lite/references/board-template.md | awk -v plan=docs/sessions/plan.json '$0=="__DATA__"{while((getline l < plan)>0){gsub(/<\//,"<\\/",l); print l}; next} {print}' > session-board.html
    ```
 
 A plan with more than six sessions or more than three waves still builds; the board then says the
@@ -58,9 +59,8 @@ job is big enough for the full Session Board.
 
 | Path | What it is |
 |---|---|
-| `skills/session-board-lite/SKILL.md` | the skill: how to split a job, the plan format, the build step |
-| `skills/session-board-lite/scripts/build.py` | validates `plan.json` and writes the board (Python 3, standard library) |
-| `skills/session-board-lite/assets/template.html` | the board page |
+| `skills/session-board-lite/SKILL.md` | the skill: how to split a job, the plan format, the checks, the build step |
+| `skills/session-board-lite/references/board-template.md` | the board page, kept in Markdown |
 | screenshot folder | the screenshot above |
 | `.claude-plugin/plugin.json` | the plugin manifest |
 | `INSTALL.md`, `CREDITS.md`, `CHANGELOG.md`, `LICENSE` | install routes, credits, versions, licence |
@@ -101,7 +101,7 @@ Provided as is. You are responsible for what the sessions you launch do to your 
 
 ## Privacy
 
-Session Board Lite collects and sends no data. Its build script (`scripts/build.py`) runs on your
+Session Board Lite collects and sends no data. Its build step is one `awk` command that runs on your
 machine, makes no network calls, and writes the board as a local HTML file in your project. When
 you open that file in a browser, the page loads its fonts from Google Fonts (fonts.googleapis.com
 and fonts.gstatic.com), so your browser makes those requests; no plan, prompt or project content

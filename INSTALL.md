@@ -7,8 +7,8 @@ background and nothing is downloaded at install time.
 
 - **Claude Code 2.1.116 or newer** (the version this skill was tested with), on any paid Claude
   plan that includes Claude Code.
-- **Python 3.** The build script uses only the standard library, so there is nothing to install.
-  Check with `python3 --version`.
+- **`awk`**, to build the board. It ships with macOS and Linux; on Windows use Git Bash or WSL.
+  There is nothing to install.
 - A browser, to open the board.
 
 ## Route A: the plugin marketplace (recommended)
@@ -67,10 +67,10 @@ in a browser.
 It plans and writes prompts. It does not start the sessions for you; you copy each prompt into a
 new Claude Code session. It does not check that your sessions followed their prompts. It builds
 the board once. To change it, edit `docs/sessions/plan.json` (for example set a session's `status`
-to `done`) and run the build again with the script in the skill folder:
+to `done`) and run the build again with the template in the skill folder:
 
 ```bash
-python3 <skill folder>/scripts/build.py docs/sessions/plan.json session-board.html --local
+awk '/^```html$/{on=1;next} /^```$/{on=0} on' "<skill folder>/references/board-template.md" | awk -v plan=docs/sessions/plan.json '$0=="__DATA__"{while((getline l < plan)>0){gsub(/<\//,"<\\/",l); print l}; next} {print}' > session-board.html
 ```
 
 Build to the same file name each time: the Done checkmarks you tick on the board are saved in the
