@@ -28,8 +28,10 @@ words, for example "split this into sessions I can run in parallel".
 
 ## Route B: copy the skill folder
 
+Download the repository (the green **Code** button, then **Download ZIP**) and unzip it. From the
+folder that holds the unzipped `session-board-lite` folder:
+
 ```bash
-git clone https://github.com/adityavora16/session-board-lite.git
 mkdir -p ~/.claude/skills && cp -R session-board-lite/skills/* ~/.claude/skills/
 ```
 
@@ -42,8 +44,9 @@ If you also own the full Session Board, the two sit side by side: this one is
 
 ## Route C: try it for one session
 
+With the unzipped `session-board-lite` folder from Route B:
+
 ```bash
-git clone https://github.com/adityavora16/session-board-lite.git
 claude --plugin-dir ./session-board-lite
 ```
 
