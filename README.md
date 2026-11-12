@@ -98,3 +98,11 @@ MIT, see [`LICENSE`](LICENSE). The fonts a board loads from Google Fonts are und
 License 1.1; details in [`CREDITS.md`](CREDITS.md).
 
 Provided as is. You are responsible for what the sessions you launch do to your projects.
+
+## Privacy
+
+Session Board Lite collects and sends no data. Its build script (`scripts/build.py`) runs on your
+machine, makes no network calls, and writes the board as a local HTML file in your project. When
+you open that file in a browser, the page loads its fonts from Google Fonts (fonts.googleapis.com
+and fonts.gstatic.com), so your browser makes those requests; no plan, prompt or project content
+is sent with them. Nothing is retained anywhere except the files written to your own disk.
