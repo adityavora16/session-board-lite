@@ -61,7 +61,7 @@ job is big enough for the full Session Board.
 | `skills/session-board-lite/SKILL.md` | the skill: how to split a job, the plan format, the build step |
 | `skills/session-board-lite/scripts/build.py` | validates `plan.json` and writes the board (Python 3, standard library) |
 | `skills/session-board-lite/assets/template.html` | the board page |
-| `screenshot/board-lite.png` | the screenshot above |
+| screenshot folder | the screenshot above |
 | `.claude-plugin/plugin.json` | the plugin manifest |
 | `INSTALL.md`, `CREDITS.md`, `CHANGELOG.md`, `LICENSE` | install routes, credits, versions, licence |
 

@@ -21,5 +21,5 @@ The build script imports only `html`, `json`, `sys` and `pathlib`. There is noth
 
 ## Data
 
-The screenshot in `screenshot/board-lite.png` shows a board built from an invented three-session job. It describes
+The screenshot in the screenshot folder shows a board built from an invented three-session job. It describes
 an invented project and contains no data from any source.
